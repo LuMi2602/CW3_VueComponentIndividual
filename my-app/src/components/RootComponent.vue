@@ -46,7 +46,7 @@
         }
       },
       fetchLessons() {
-        fetch('http://localhost/lessons')
+        fetch('http://localhost:3000/lesson')
           .then(response => response.json())
           .then(data => {
             this.lessons = data;
