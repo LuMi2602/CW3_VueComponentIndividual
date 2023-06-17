@@ -1,76 +1,14 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <title>Vue.js Individual Work</title>
-
-  <script src="https://unpkg.com/vue"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-<!-- <script src="x_classes.js"></script> -->
-
-  <style>
-    body {
-      color: white;
-      font-family: Arial, Helvetica, sans-serif
-    }
-
-    footer {
-
-      color: white;
-    }
-
-    #individual {
-      background-image: url(images/scl.jpg);
-      background-size: contain;
-      padding-left: 1.5rem;
-
-    }
-
-    #item {
-
-      text-decoration-color: white;
-      background-color: #212142;
-      max-width: 320px;
-      margin-right: 3rem;
-      margin-top: 1rem;
-
-      margin-bottom: 3rem;
-      padding: 1rem;
-      border: 1px solid #212142;
-      border-radius: 1rem;
-      display: inline-block;
-
-    }
-    
-
-    img {
-      box-sizing: border-box;
-      padding-left: 0%;
-      object-fit: cover;
-      width: 100%;
-      text-decoration-color: aliceblue;
-
-    }
-
-    #searchinput {
-      width: 40%;
-      padding-left: 35%;
-      margin-top: 1rem;
-
-
-    }
-
-    #submit {
-      font-size: medium;
-      position: relative;
-      margin-bottom: 1rem;
-    }
-  </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson Store</title>
 </head>
 
 <body>
-  <div id="individual"></div>
+  <div id="app"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
   <script>
@@ -78,7 +16,7 @@
     import RootComponent from './components/RootComponent.vue';
 
     new Vue({
-      el: '#individual',
+      el: '#app',
       components: {
         RootComponent,
       },
