@@ -15,7 +15,7 @@
         </p>
       
       <div id="item" v-for="lesson in cart" :key="lesson._id">
-          <img id="img" :src="lesson.images" />
+          <img id="img" :src="lesson.Image" />
         <p>{{ lesson.Subject}}</p>
         <p>Location:{{ lesson.Location}}</p>
         <p>Price:{{ lesson.Price}}</p>

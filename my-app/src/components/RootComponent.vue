@@ -55,10 +55,7 @@
         fetch('http://localhost:3000/lesson')
           .then(response => response.json())
           .then(data => {
-            this.lessons = data.map(x=>{
-              x["images"] = `assets/${x.Image.split("/")[1]}`
-              return x
-            });
+            this.lessons = data
           })
           .catch(error => {
             console.error(error);

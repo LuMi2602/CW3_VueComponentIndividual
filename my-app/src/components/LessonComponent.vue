@@ -46,7 +46,7 @@
         <!-- displaying results of the search  -->
         
         <div id="item" v-for="result in searchEmpty" :key="result._id">
-          <img id="img" :src="result.images" />
+          <img id="img" :src="result.Image" />
           <p>{{ result.Subject }}</p>
           <p>Location: {{ result.Location }}</p>
           <p>Price: {{ result.Price }}</p>
@@ -58,13 +58,13 @@
         <!--Displaying items sorted by order of Subject upon button selection-->
         <div v-if="sortOption === 'subjectSort'">
           <div id="item" v-for="x_classes in SubjectSort" :key="x_classes.id">
-            <img id="img"><img v-bind:src="x_classes.images"/>
+            <img id="img"><img v-bind:src="x_classes.Image"/>
             <p v-text="x_classes.Subject"></p>
             <p>Location : {{x_classes.Location}}</p>
             <p>Price : {{x_classes.Price}}</p>
             <p>Available Space:{{ x_classes.Space}}</p>
 
-            <button v-on:click='addToCart(x_classes)' v-if='result.Space > 0'>Add to cart</button>
+            <button v-on:click='addToCart(x_classes)' v-if='x_classes.Space > 0'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
           </div>
 
@@ -75,21 +75,86 @@
         <div v-if="sortOption == 'locationSort'">
           <div id="item" v-for=" x_classes in LocationSort" :key="x_classes.id">
 
-            <img id="img"><img v-bind:src="x_classes.images"/>
+            <img id="img"><img v-bind:src="x_classes.Image"/>
 
             <p v-text="x_classes.Subject"></p>
             <p>Location : {{x_classes.Location}}</p>
             <p>Price : {{x_classes.Price}}</p>
             <p>Available Space:{{ x_classes.Space }}</p>
 
-            <button v-on:click='addToCart(x_classes)' v-if='result.Space > 0'>Add to cart</button>
+            <button v-on:click='addToCart(x_classes)' v-if='x_classes.Space > 0'>Add to cart</button>
             <button disabled="disabled" v-else>Add to cart</button>
-
-
           </div>
         </div>
+
+         <!--Displaying items sorted by order of Price upon radio button selection-->
+        <div v-if="sortOption == 'priceSort'">
+          <div id="item" v-for=" x_classes in PriceSort" :key="x_classes.id">
+
+            <img id="img"><img v-bind:src="x_classes.Image"/>
+
+            <p v-text="x_classes.Subject"></p>
+            <p>Location : {{x_classes.Location}}</p>
+            <p>Price : {{x_classes.Price}}</p>
+            <p>Available Space:{{ x_classes.Space }}</p>
+
+            <button v-on:click='addToCart(x_classes)' v-if='x_classes.Space > 0'>Add to cart</button>
+            <button disabled="disabled" v-else>Add to cart</button>
+          </div>
+        </div>
+
+
+        <!--Displaying items sorted by order of Availability upon radio button selection-->
+        <div v-if="sortOption == 'SpaceSort'">
+          <div id="item" v-for=" x_classes in SpaceSort" :key="x_classes.id">
+
+            <img id="img"><img v-bind:src="x_classes.Image"/>
+
+            <p v-text="x_classes.Subject"></p>
+            <p>Location : {{x_classes.Location}}</p>
+            <p>Price : {{x_classes.Price}}</p>
+            <p>Available Space:{{ x_classes.Space }}</p>
+
+            <button v-on:click='addToCart(x_classes)' v-if='x_classes.Space > 0'>Add to cart</button>
+            <button disabled="disabled" v-else>Add to cart</button>
+          </div>
+        </div>
+
+         <!--Displaying items in ascending order-->
+         <div v-if="sortOption == 'asc'">
+          <div id="item" v-for=" x_classes in sortedItemsAsc" :key="x_classes.id">
+
+            <img id="img"><img v-bind:src="x_classes.Image"/>
+
+            <p v-text="x_classes.Subject"></p>
+            <p>Location : {{x_classes.Location}}</p>
+            <p>Price : {{x_classes.Price}}</p>
+            <p>Available Space:{{ x_classes.Space }}</p>
+
+            <button v-on:click='addToCart(x_classes)' v-if='x_classes.Space > 0'>Add to cart</button>
+            <button disabled="disabled" v-else>Add to cart</button>
+          </div>
+        </div>
+
+         <!--Displaying items sorted by order of Availability upon radio button selection-->
+         <div v-if="sortOption == 'desc'">
+          <div id="item" v-for=" x_classes in sortedItemsDesk" :key="x_classes.id">
+
+            <img id="img"><img v-bind:src="x_classes.Image"/>
+
+            <p v-text="x_classes.Subject"></p>
+            <p>Location : {{x_classes.Location}}</p>
+            <p>Price : {{x_classes.Price}}</p>
+            <p>Available Space:{{ x_classes.Space }}</p>
+
+            <button v-on:click='addToCart(x_classes)' v-if='x_classes.Space > 0'>Add to cart</button>
+            <button disabled="disabled" v-else>Add to cart</button>
+          </div>
+        </div>
+
+
         <div id="item" v-for="lesson in lessons" :key="lesson.id">
-        <img id="img" :src="lesson.images" />
+        <img id="img" :src="lesson.Image" />
         <p>{{ lesson.Subject}}</p>
         <p>Location:{{ lesson.Location}}</p>
         <p>Price:{{ lesson.Price}}</p>
@@ -150,8 +215,86 @@ emptyCart: true,
     },
   },
   computed:{
-    
+       //computed property to sort by Subject
+       SubjectSort() {
+          let SubjectArray = this.lessons.slice(0);
+          function compare(a, b) {
+            if
+              (a.Subject > b.Subject)
+              return 1;
+            if
+              (a.Subject < b.Subject)
+              return -1;
+            return 0;
+          }
+          if(SubjectArray)return SubjectArray.sort(compare);
+          return this.lessons
+        },
+          ///computed property to sort by Location
+          LocationSort() {
+          let LocationArray = this.lessons.slice(0);
+          function compare(a, b) {
+            if
+              (a.Location > b.Location)
+              return 1;
+            if
+              (a.Location < b.Location)
+              return -1;
+            return 0;
+          }
+          return LocationArray.sort(compare);
+        },
+        
   },
+
+   ///computed property to sort by Price
+   PriceSort() {
+          let PriceArray = this.lessons.slice(0);
+          function compare(a, b) {
+            if
+              (a.Price > b.Price)
+              return 1;
+            if
+              (a.Price < b.Price)
+              return -1;
+
+            return 0;
+          }
+          console.log(PriceArray);
+          return PriceArray.sort(compare);
+        },
+
+        ///computed property to sort by Availability
+        SpaceSort() {
+          let SpaceArray = this.lessons.slice(0);
+          function compare(a, b) {
+            if
+              (a.Space > b.Space)
+              return 1;
+            if
+              (a.Space < b.Space)
+              return -1;
+            return 0;
+          }
+          return SpaceArray.sort(compare);
+        },
+///computed property to order elements in asc order
+sortedItemsAsc() {
+          return this.lessons.sort((a, b) => {
+            return a.Subject.localeCompare(b.Subject);
+
+          });
+
+        },
+        ///computed property to order elements in desc order
+        sortedItemsDesk() {
+          return this.lessons.sort((a, b) => {
+            return b.Subject.localeCompare(a.Subject);
+
+          });
+
+        },
+
     cartCount(id) {
           let count = 0;
           for (let i = 0; i < this.cart.length; i++) {
