@@ -28,7 +28,7 @@ export default {
     }
 
     #app {
-      background-image: url(images/scl.jpg);
+      background-image: url(assets/scl.jpg);
       background-size: contain;
       padding-left: 1.5rem;
 

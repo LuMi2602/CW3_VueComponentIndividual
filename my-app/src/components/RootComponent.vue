@@ -6,7 +6,7 @@
         <LessonComponent :lessons="lessons" @addLesson="addToCart"></LessonComponent>
       </div>
       <div v-else>
-        <CheckoutComponent :cart="cart" @removeLesson="removeFromCart"></CheckoutComponent>
+        <CheckoutComponent :cart="cart" :cartCount="cartCount" @removeLesson="removeFromCart"></CheckoutComponent>
       </div>
     </div>
   </template>
@@ -28,6 +28,11 @@
         cart: [],
       };
     },
+    computed:{
+      cartCount(){
+        return `${this.cart.length}`
+      }
+    },
     methods: {
       toggleView() {
         this.view = this.view === 'lesson' ? 'checkout' : 'lesson';
@@ -36,9 +41,11 @@
         return this.view === 'lesson' ? 'View Cart' : 'View Lessons';
       },
       addToCart(lesson) {
+        lesson.Space--
         this.cart.push(lesson);
       },
       removeFromCart(lesson) {
+        lesson.Space++
         const index = this.cart.findIndex((item) => item.id === lesson.id);
         if (index !== -1) {
           this.cart.splice(index, 1);
@@ -48,14 +55,17 @@
         fetch('http://localhost:3000/lesson')
           .then(response => response.json())
           .then(data => {
-            this.lessons = data;
+            this.lessons = data.map(x=>{
+              x["images"] = `assets/${x.Image.split("/")[1]}`
+              return x
+            });
           })
           .catch(error => {
             console.error(error);
           });
       },
     },
-    mounted() {
+    created() {
       this.fetchLessons();
     },
   };
