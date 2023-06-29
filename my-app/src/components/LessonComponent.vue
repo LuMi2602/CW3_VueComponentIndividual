@@ -3,7 +3,7 @@
     <h2>Lesson List</h2>
     <ul>
       <div>
-           <h3>Sort:</h3>
+          <h3>Sort:</h3>
           <input type="radio" id="subjectSort" value="subjectSort" v-model="sortOption" checked="true">
           <label for="subjectSort">Sort by Subject</label>
         </div>
@@ -25,7 +25,7 @@
 
         <!--Code to allow the user to select where to arrange the items in ascending or 
             descending order-->
-        <div id>
+        <div>
           <h3>Order By:</h3>
           <input type="radio" id="asc" value="asc" v-model="sortOption">
           <label for="asc">Ascending order</label>

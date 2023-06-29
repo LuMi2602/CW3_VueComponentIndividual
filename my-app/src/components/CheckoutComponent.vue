@@ -22,6 +22,10 @@
           <button @click="removeFromCart(lesson)">Remove</button>
         
      </div>
+     <div id="submit">
+      <!-- <button v-on:click="submitForm">Place Order</button> -->
+      <button id="submit" v-on:click="submitForm" :disabled="isButtonDisabled">Place Order</button>
+  </div>
     </div>
   </template>
   
@@ -38,14 +42,12 @@
       required: false,
     },
     },
-    data(){
-    return {
-      inputl: '',
-      Inputn: '',
-    }
 
-  },
-  
+    methods: {
+      removeFromCart(lesson) {
+        this.$emit('removeLesson', lesson);
+      },
+    },
   };
   </script>
   
