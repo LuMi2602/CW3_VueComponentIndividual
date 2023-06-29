@@ -6,7 +6,7 @@
         <LessonComponent :lessons="lessons" @addLesson="addToCart"></LessonComponent>
       </div>
       <div v-else>
-        <CheckoutComponent :cart="cart" :cartCount="cartCount" @removeLesson="removeFromCart"></CheckoutComponent>
+        <CheckoutComponent :cart="cart" :cartCount="cartCount" @removeLesson="removeFromCart" @submitCart="submitCart"></CheckoutComponent>
       </div>
     </div>
   </template>
@@ -34,6 +34,11 @@
       }
     },
     methods: {
+      submitCart(){
+        alert("Order submited")
+        this.cart = []
+        this.toggleView()
+      },
       toggleView() {
         this.view = this.view === 'lesson' ? 'checkout' : 'lesson';
       },

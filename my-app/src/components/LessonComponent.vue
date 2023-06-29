@@ -175,6 +175,7 @@ export default {
     },
   
   },
+  
   created(){
     this.lessons_array = this.lessons
   },
