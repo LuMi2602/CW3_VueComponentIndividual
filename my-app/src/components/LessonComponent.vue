@@ -182,6 +182,8 @@ export default {
     return {
       sortOption: "subjectSort",
    userSearch: '',
+   inputl: '',
+  Inputn: '',
 
 searchEmpty: [],
 lessons_array:[],
@@ -244,10 +246,7 @@ emptyCart: true,
           }
           return LocationArray.sort(compare);
         },
-        
-  },
-
-   ///computed property to sort by Price
+        ///computed property to sort by Price
    PriceSort() {
           let PriceArray = this.lessons.slice(0);
           function compare(a, b) {
@@ -260,7 +259,6 @@ emptyCart: true,
 
             return 0;
           }
-          console.log(PriceArray);
           return PriceArray.sort(compare);
         },
 
@@ -280,7 +278,7 @@ emptyCart: true,
         },
 ///computed property to order elements in asc order
 sortedItemsAsc() {
-          return this.lessons.sort((a, b) => {
+          return [...this.lessons].sort((a, b) => {
             return a.Subject.localeCompare(b.Subject);
 
           });
@@ -288,7 +286,7 @@ sortedItemsAsc() {
         },
         ///computed property to order elements in desc order
         sortedItemsDesk() {
-          return this.lessons.sort((a, b) => {
+          return [...this.lessons].sort((a, b) => {
             return b.Subject.localeCompare(a.Subject);
 
           });
@@ -306,6 +304,9 @@ sortedItemsAsc() {
           // console.log(count, 'this is count.')
           return count;
         },
+  },
+
+   
 
        
 };

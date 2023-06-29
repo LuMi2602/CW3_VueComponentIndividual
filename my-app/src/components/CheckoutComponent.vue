@@ -47,6 +47,64 @@
       removeFromCart(lesson) {
         this.$emit('removeLesson', lesson);
       },
+      submitForm() {
+          let data = {}
+            for (let i = 0; i < this.cart.length; i++) {
+                const item = this.cart[i];
+                if (!data[`${item["_id"]}`]) {
+                    data[`${item["_id"]}`] = {
+                        "spaces":1,
+                        "item":item
+                    }
+                }else{
+                    data[`${item["_id"]}`]["spaces"]++
+                }
+            }
+            const keys = Object.keys(data)
+            const values = Object.values(data)
+            fetch(`http://localhost:3000/order`,{
+                method:'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "name":this.inputl,
+                    "phoneNumber":this.Inputn,
+                })
+            })
+            .then(result => result.json())
+            .then(result =>{
+              console.log(result);
+                    fetch(`http://localhost:3000/order/${result}`,{
+                        method:'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({"items":values})
+                    }).then(result => result.json())
+                    .then(result => {
+                            for (let i = 0; i < keys.length; i++) {
+                                const key = keys[i];
+                                const value = values[i];
+                                console.log(value);
+                                fetch(`http://localhost:3000/lesson/${key}`,{
+                                    method:'PUT',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({"space":value["item"].Space})
+                                })
+                            }
+                            this.cart = []
+                            this.showCheckout()
+                        
+                    })
+            }).catch(err =>{
+                console.log(err);
+            });
+          alert('Order submitted!')
+
+        },
     },
   };
   </script>
