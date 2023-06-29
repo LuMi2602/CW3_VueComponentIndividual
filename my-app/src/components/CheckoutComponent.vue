@@ -24,7 +24,7 @@
      </div>
      <div id="submit">
       <!-- <button v-on:click="submitForm">Place Order</button> -->
-      <button id="submit" v-on:click="submitForm" :disabled="isButtonDisabled">Place Order</button>
+      <button id="submit" v-if="LetterMust && numberMust" v-on:click="submitForm" :disabled="isButtonDisabled">Place Order</button>
   </div>
     </div>
   </template>
@@ -43,6 +43,12 @@
       },
     },
     emits:["submitCart"],
+    data(){
+      return {
+        inputl: '',
+         Inputn: '',
+      }
+    },
     methods: {
       removeFromCart(lesson) {
         this.$emit('removeLesson', lesson);
@@ -51,7 +57,20 @@
         this.$emit('submitCart');
 
         },
+
     },
+
+    computed:{
+      numberMust() {
+        let res = this.Inputn.match(/^[0-9]+$/)
+      return res
+   },
+
+LetterMust() {
+  let res = this.inputl.match(/^[a-zA-Z\s]+$/)
+return res
+}
+    }
   };
   </script>
   

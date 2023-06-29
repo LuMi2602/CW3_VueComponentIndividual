@@ -175,7 +175,7 @@ export default {
     },
   
   },
-  
+
   created(){
     this.lessons_array = this.lessons
   },
@@ -183,8 +183,7 @@ export default {
     return {
       sortOption: "subjectSort",
    userSearch: '',
-   inputl: '',
-  Inputn: '',
+
 
 searchEmpty: [],
 lessons_array:[],
